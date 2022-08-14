@@ -1,253 +1,199 @@
-<div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
+# The Graph Node Client (modified for Motif Blockchain)
 
+[![Build Status](https://github.com/graphprotocol/graph-node/actions/workflows/ci.yml/badge.svg)](https://github.com/graphprotocol/graph-node/actions/workflows/ci.yml?query=branch%3Amaster)
+[![Getting Started Docs](https://img.shields.io/badge/docs-getting--started-brightgreen.svg)](docs/getting-started.md)
 
+[The Graph](https://thegraph.com/) is a protocol for building decentralized applications (dApps) quickly on Ethereum and IPFS using GraphQL.
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+Graph Node is an open source Rust implementation that event sources the Ethereum blockchain to deterministically update a data store that can be queried via the GraphQL endpoint.
 
+For detailed instructions and more context, check out the [Getting Started Guide](docs/getting-started.md).
 
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-  <h3 align="center">README-Template</h3>
-
-  <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
-  </p>
-</div>
-
-
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+## Quick Start
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+To build and run this project you need to have the following installed on your system:
 
-### Installation
+- Rust (latest stable) – [How to install Rust](https://www.rust-lang.org/en-US/install.html)
+  - Note that `rustfmt`, which is part of the default Rust installation, is a build-time requirement.
+- PostgreSQL – [PostgreSQL Downloads](https://www.postgresql.org/download/)
+- IPFS – [Installing IPFS](https://docs.ipfs.io/install/)
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+For Ethereum network data, you can either run your own Ethereum node or use an Ethereum node provider of your choice.
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+**Minimum Hardware Requirements:**
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+- To build graph-node with `cargo`, 8GB RAM are required.
 
+### Running a Local Graph Node
 
+This is a quick example to show a working Graph Node. It is a [subgraph for Gravatars](https://github.com/graphprotocol/example-subgraph).
 
-<!-- USAGE EXAMPLES -->
-## Usage
+1. Install IPFS and run `ipfs init` followed by `ipfs daemon`.
+2. Install PostgreSQL and run `initdb -D .postgres` followed by `pg_ctl -D .postgres -l logfile start` and `createdb graph-node`.
+3. If using Ubuntu, you may need to install additional packages:
+   - `sudo apt-get install -y clang libpq-dev libssl-dev pkg-config`
+4. In the terminal, clone https://github.com/graphprotocol/example-subgraph, and install dependencies and generate types for contract ABIs:
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+```
+yarn
+yarn codegen
+```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+5. In the terminal, clone https://github.com/graphprotocol/graph-node, and run `cargo build`.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+Once you have all the dependencies set up, you can run the following:
 
+```
+cargo run -p graph-node --release -- \
+  --postgres-url postgresql://USERNAME[:PASSWORD]@localhost:5432/graph-node \
+  --ethereum-rpc NETWORK_NAME:[CAPABILITIES]:URL \
+  --ipfs 127.0.0.1:5001
+```
 
+Try your OS username as `USERNAME` and `PASSWORD`. For details on setting
+the connection string, check the [Postgres
+documentation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
+`graph-node` uses a few Postgres extensions. If the Postgres user with which
+you run `graph-node` is a superuser, `graph-node` will enable these
+extensions when it initalizes the database. If the Postgres user is not a
+superuser, you will need to create the extensions manually since only
+superusers are allowed to do that. To create them you need to connect as a
+superuser, which in many installations is the `postgres` user:
 
-<!-- ROADMAP -->
+```bash
+    psql -q -X -U <SUPERUSER> graph-node <<EOF
+create extension pg_trgm;
+create extension pg_stat_statements;
+create extension btree_gist;
+create extension postgres_fdw;
+grant usage on foreign data wrapper postgres_fdw to <USERNAME>;
+EOF
+
+```
+
+This will also spin up a GraphiQL interface at `http://127.0.0.1:8000/`.
+
+6.  With this Gravatar example, to get the subgraph working locally run:
+
+```
+yarn create-local
+```
+
+Then you can deploy the subgraph:
+
+```
+yarn deploy-local
+```
+
+This will build and deploy the subgraph to the Graph Node. It should start indexing the subgraph immediately.
+
+### Command-Line Interface
+
+```
+USAGE:
+    graph-node [FLAGS] [OPTIONS] --ethereum-ipc <NETWORK_NAME:FILE> --ethereum-rpc <NETWORK_NAME:URL> --ethereum-ws <NETWORK_NAME:URL> --ipfs <HOST:PORT> --postgres-url <URL>
+
+FLAGS:
+        --debug      Enable debug logging
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+        --admin-port <PORT>                           Port for the JSON-RPC admin server [default: 8020]
+        --elasticsearch-password <PASSWORD>
+            Password to use for Elasticsearch logging [env: ELASTICSEARCH_PASSWORD]
+
+        --elasticsearch-url <URL>
+            Elasticsearch service to write subgraph logs to [env: ELASTICSEARCH_URL=]
+
+        --elasticsearch-user <USER>                   User to use for Elasticsearch logging [env: ELASTICSEARCH_USER=]
+        --ethereum-ipc <NETWORK_NAME:[CAPABILITIES]:FILE>
+            Ethereum network name (e.g. 'mainnet'), optional comma-seperated capabilities (eg full,archive), and an Ethereum IPC pipe, separated by a ':'
+
+        --ethereum-polling-interval <MILLISECONDS>
+            How often to poll the Ethereum node for new blocks [env: ETHEREUM_POLLING_INTERVAL=]  [default: 500]
+
+        --ethereum-rpc <NETWORK_NAME:[CAPABILITIES]:URL>
+            Ethereum network name (e.g. 'mainnet'), optional comma-seperated capabilities (eg 'full,archive'), and an Ethereum RPC URL, separated by a ':'
+
+        --ethereum-ws <NETWORK_NAME:[CAPABILITIES]:URL>
+            Ethereum network name (e.g. 'mainnet'), optional comma-seperated capabilities (eg `full,archive), and an Ethereum WebSocket URL, separated by a ':'
+
+        --node-id <NODE_ID>
+            A unique identifier for this node instance. Should have the same value between consecutive node restarts [default: default]
+
+        --http-port <PORT>                            Port for the GraphQL HTTP server [default: 8000]
+        --ipfs <HOST:PORT>                            HTTP address of an IPFS node
+        --postgres-url <URL>                          Location of the Postgres database used for storing entities
+        --subgraph <[NAME:]IPFS_HASH>                 Name and IPFS hash of the subgraph manifest
+        --ws-port <PORT>                              Port for the GraphQL WebSocket server [default: 8001]
+```
+
+### Advanced Configuration
+
+The command line arguments generally are all that is needed to run a
+`graph-node` instance. For advanced uses, various aspects of `graph-node`
+can further be configured through [environment
+variables](https://github.com/graphprotocol/graph-node/blob/master/docs/environment-variables.md). Very
+large `graph-node` instances can also split the work of querying and
+indexing across [multiple databases](./docs/config.md).
+
+## Project Layout
+
+- `node` — A local Graph Node.
+- `graph` — A library providing traits for system components and types for
+  common data.
+- `core` — A library providing implementations for core components, used by all
+  nodes.
+- `chain/ethereum` — A library with components for obtaining data from
+  Ethereum.
+- `graphql` — A GraphQL implementation with API schema generation,
+  introspection, and more.
+- `mock` — A library providing mock implementations for all system components.
+- `runtime/wasm` — A library for running WASM data-extraction scripts.
+- `server/http` — A library providing a GraphQL server over HTTP.
+- `store/postgres` — A Postgres store with a GraphQL-friendly interface
+  and audit logs.
+
 ## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
+🔨 = In Progress
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+🛠 = Feature complete. Additional testing required.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+✅ = Feature complete
 
 
+| Feature |  Status |
+| ------- |  :------: |
+| **Ethereum** |    |
+| Indexing smart contract events | ✅ |
+| Handle chain reorganizations | ✅ |
+| **Mappings** |    |
+| WASM-based mappings| ✅ |
+| TypeScript-to-WASM toolchain | ✅ |
+| Autogenerated TypeScript types | ✅ |
+| **GraphQL** |     |
+| Query entities by ID | ✅ |
+| Query entity collections | ✅ |
+| Pagination | ✅ |
+| Filtering | ✅ |
+| Block-based Filtering | ✅ |
+| Entity relationships | ✅ |
+| Subscriptions | ✅ |
 
-<!-- CONTRIBUTING -->
+
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Please check [CONTRIBUTING.md](CONTRIBUTING.md) for development flow and conventions we use.
+Here's [a list of good first issues](https://github.com/graphprotocol/graph-node/labels/good%20first%20issue).
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Copyright &copy; 2018-2019 Graph Protocol, Inc. and contributors.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+The Graph is dual-licensed under the [MIT license](LICENSE-MIT) and the [Apache License, Version 2.0](LICENSE-APACHE).
 
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either expressed or implied. See the License for the specific language governing permissions and limitations under the License.
