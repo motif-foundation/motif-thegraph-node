@@ -1799,11 +1799,13 @@ dependencies = [
 
 [[package]]
 name = "graphql-tools"
-version = "0.0.15"
+version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f47ccdd42a537f86a915d9ca4c5880005183d6eb544b86d9e924511942a00647"
+checksum = "13c437afbde2b7eabd07ba68dbcdaa33e0bb122032a235623036f6f8c2f78d3b"
 dependencies = [
  "graphql-parser",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
